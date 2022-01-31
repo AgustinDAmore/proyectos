@@ -1,4 +1,4 @@
-import subprocess
+import subprocess, diccionarioPuertos
 class nmap():
 
     __slots__ = ['ip']
@@ -34,12 +34,12 @@ class nmap():
         return lista
     
     def puertosabiertosconinformacion(self,ip):
-        diccionario = {"1": "Multiplexor TCP", "5": "Entrada de trabajo remota", "22": "conexiones seguras SSH y SFTP", "80": f"http://{ip}"}
         lista = self.puertosabiertos(ip)
+        listaDePuertos = diccionarioPuertos.Puertos()
         for i in range(len(lista)):
             if "/tcp" in lista[i]:
                 try:
-                    lista[i] = (lista[i],f"{diccionario[lista[i][:lista[i].index('/tcp')]]}")
+                    lista[i] = (lista[i],f"{listaDePuertos.diccionario()[lista[i][:lista[i].index('/tcp')]]}")
                     lista[i] = str(lista[i]).replace(",","").replace(")","").replace("(","").replace("'","")
                 except KeyError:
                     pass
