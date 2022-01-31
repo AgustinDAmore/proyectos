@@ -39,7 +39,7 @@ class nmap():
         for i in range(len(lista)):
             if "/tcp" in lista[i]:
                 try:
-                    lista[i] = (lista[i],f"{listaDePuertos.diccionario()[lista[i][:lista[i].index('/tcp')]]}")
+                    lista[i] = (lista[i],f"{listaDePuertos.diccionario(ip)[lista[i][:lista[i].index('/tcp')]]}")
                     lista[i] = str(lista[i]).replace(",","").replace(")","").replace("(","").replace("'","")
                 except KeyError:
                     pass
@@ -48,9 +48,15 @@ class nmap():
 
 if __name__ == '__main__':
     nmap = nmap("wlan0")
-    for i in nmap.puertosabiertos("192.168.0.1"):
+    dispositivos = nmap.ipenlared()
+    for i in dispositivos:
         print(i)
+        for i in nmap.puertosabiertos(i):
+            print(i)
+        print("\n")
     print("\n")
-    for i in nmap.puertosabiertosconinformacion("192.168.0.1"):
+    for i in dispositivos:
         print(i)
-    
+        for i in nmap.puertosabiertosconinformacion(i):
+            print(i)
+        print("\n")

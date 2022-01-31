@@ -5,8 +5,7 @@ class Puertos():
     def __init__(self) -> None:
         pass
 
-    def diccionario(self) -> dict:
-        ip = Any
+    def diccionario(self,ip = Any) -> dict:
         return {
             "1": "Multiplexor TCP", 
             "5": "Entrada de trabajo remota",
